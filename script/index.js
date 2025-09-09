@@ -1,9 +1,9 @@
+
 const loadCategories = () => {
   fetch(`https://openapi.programming-hero.com/api/categories`)
     .then((res) => res.json())
     .then((json) => displayCategories(json.categories))
 }
-
 
 const loadPlants = (id) => {
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
@@ -19,9 +19,38 @@ const loadPlants = (id) => {
 
 const removeActive = () => {
   const newCategorieBtns = document.querySelectorAll(".category-btn");
-  newCategorieBtns.forEach((newCategorieBtn)=>newCategorieBtn.classList.remove("active")); 
+  newCategorieBtns.forEach((newCategorieBtn) => newCategorieBtn.classList.remove("active"));
 
 }
+
+const plantDitels = (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`
+  fetch(url)
+    .then((res) => res.json())
+    .then((ditels) => aboutPlants(ditels.plants))
+}
+
+
+
+const aboutPlants = (plants) => {
+  console.log(plants);
+
+  const plantsDitelsBox = document.getElementById("details-container");
+  plantsDitelsBox.innerHTML = `
+        <div>
+          <h2 class="font-semibold text-2xl">${plants.name}</h2>
+        </div>
+        <div>
+          <img class="py-2" width='250' src="${plants.image}" alt="">
+        </div>
+        <h1><span class="font-semibold text-base">Category: </span>${plants.category}</h1>
+        <h1 class="py-2"><span class="font-semibold text-base">price: </span>${plants.price}</h1>
+        <p class="pb-8"><span class="font-semibold text-base">Description: </span>${plants.description}</p>
+        `;
+  document.getElementById("plants_modal").showModal();
+}
+
+
 
 const displayDifPlants = (DifPlants) => {
   const plantsContainer = document.getElementById("card-container");
@@ -31,7 +60,7 @@ const displayDifPlants = (DifPlants) => {
     plantsByCategoris.innerHTML = `
     <div class="max-w-sm bg-white rounded-lg shadow p-4 items-center">
             <img class="w-full h-40 object-cover rounded-md mb-4" src="${DifPlant.image}" alt="">
-            <h3 class="font-semibold text-gray-800">${DifPlant.name}</h3>
+            <button onclick="plantDitels(${DifPlant.id})" class="font-semibold text-gray-800">${DifPlant.name}</button>
             <p class="text-sm text-gray-600 mt-1 line-clamp-3">
               ${DifPlant.description}
             </p>
@@ -42,14 +71,51 @@ const displayDifPlants = (DifPlants) => {
               <span class="font-semibold text-gray-800">৳${DifPlant.price}</span>
             </div>
             <button
-              class="w-full mt-4 bg-green-700 hover:bg-green-800 text-white py-3 rounded-full font-medium transition">
+              class="cart-btn w-full mt-4 bg-green-700 hover:bg-green-800 text-white py-3 rounded-full font-medium transition">
               Add to Cart
             </button>
           </div>
     `
 
     plantsContainer.appendChild(plantsByCategoris);
-  });
+
+    const yourCartBtn = plantsByCategoris.querySelector(".cart-btn");
+    yourCartBtn.addEventListener("click", function () {
+      const treeName = DifPlant.name;
+      const treePrice = DifPlant.price;
+
+      const yourCart = document.getElementById("cart_container");
+      const yourCartCard = document.createElement("div");
+      yourCartCard.innerHTML = `
+        <div class="cart-card flex justify-between items-center mx-4 px-3 py-2 mt-2 rounded-lg bg-[#F0FDF4]">
+          <div>
+            <h1>${treeName}</h1>
+            <p>৳${treePrice}</p>
+          </div>
+          <div>
+            <button class="x-btn btn btn-square bg-transparent border-none hover:shadow-none justify-end">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+      alert(`"${treeName}" has been added to the cart`);
+      const totalPriceElement = document.getElementById("total-peice");
+      const currentTotal = Number(totalPriceElement.innerText);
+      const newTotal = currentTotal + Number(treePrice);
+      totalPriceElement.innerText = newTotal;
+      yourCart.append(yourCartCard);
+
+      const cancelBtn = yourCartCard.querySelector(".x-btn");
+      cancelBtn.addEventListener("click", function () {
+        yourCartCard.remove();
+        const addNewTotal = Number(totalPriceElement.innerText) - treePrice;
+        totalPriceElement.innerText = addNewTotal;
+
+      });
+    });
+  })
 }
 
 
@@ -62,7 +128,7 @@ const displayCategories = (categories) => {
     categorieBtn.innerHTML = `
         <button id="category-btn-${categorie.id}" onclick="loadPlants(${categorie.id})" href=""
             class="hover:bg-[#15803D] hover:scale-105 hover:text-white w-full text-start py-2 pl-[10px] rounded-[4px] mt-1 category-btn">${categorie.category_name}</button>
-        `   
+        `
     categoriesConteiner.appendChild(categorieBtn);
   }
 
@@ -85,7 +151,7 @@ const displayAllTrees = (Trees) => {
     TreeCard.innerHTML = `
         <div class="max-w-sm bg-white rounded-lg shadow p-4 h-full items-center">
             <img class="w-full h-40 object-cover rounded-md mb-4" src="${Tree.image}" alt="">
-            <h3 class="font-semibold text-gray-800">${Tree.name}</h3>
+            <button onclick="plantDitels(${Tree.id})" class="font-semibold text-gray-800">${Tree.name}</button>
             <p class="text-sm text-gray-600 mt-1 line-clamp-3">
               ${Tree.description}
             </p>
@@ -96,14 +162,53 @@ const displayAllTrees = (Trees) => {
               <span class="font-semibold text-gray-800">৳${Tree.price}</span>
             </div>
             <button
-              class="w-full mt-4 bg-green-700 hover:bg-green-800 text-white py-3 rounded-full font-medium transition">
+              class="cart-btn w-full mt-4 bg-green-700 hover:bg-green-800 text-white py-3 rounded-full font-medium transition">
               Add to Cart
             </button>
           </div>
         
         `
-
     TreeContainer.appendChild(TreeCard);
+
+    const yourCartBtn = TreeCard.querySelector(".cart-btn");
+    yourCartBtn.addEventListener("click", function () {
+      const treeName = Tree.name;
+      const treePrice = Tree.price;
+
+      const yourCart = document.getElementById("cart_container");
+      const yourCartCard = document.createElement("div");
+      yourCartCard.innerHTML = `
+        <div class="cart-card flex justify-between items-center mx-4 px-3 py-2 mt-2 rounded-lg bg-[#F0FDF4]">
+          <div>
+            <h1>${treeName}</h1>
+            <p>৳${treePrice}</p>
+          </div>
+          <div>
+            <button class="x-btn btn btn-square bg-transparent border-none hover:shadow-none justify-end">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+      alert(`"${treeName}" has been added to the cart`);
+      const totalPriceElement = document.getElementById("total-peice");
+      const currentTotal = Number(totalPriceElement.innerText);
+      const newTotal = currentTotal + treePrice;
+      totalPriceElement.innerText = newTotal;
+
+      yourCart.append(yourCartCard);
+
+      const cancelBtn = yourCartCard.querySelector(".x-btn");
+      cancelBtn.addEventListener("click", function () {
+        yourCartCard.remove();
+        const addNewTotal = Number(totalPriceElement.innerText) - treePrice;
+        totalPriceElement.innerText = addNewTotal;
+
+      })
+
+
+    });
   }
 }
 loadAllTrees();

@@ -21,12 +21,33 @@
 <body>
   <header>
     <!-- navbar -->
-    <section class="">
-      <div class="navbar bg-base-100 shadow-sm bg-[#15803D] text-white px-[135px] py-[20px]">
+    <section>
+      <div
+        class="navbar bg-base-100 shadow-sm bg-[#15803D] text-white max-md:text-black px-[135px] py-[20px] max-md:px-[30px] max-lg:px-[30px]">
         <div class="navbar-start">
-          <a class="text-xl font-bold cursor-pointer">Green Earth</a>
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost  md:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+              </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <button href=""
+                class="hover:bg-[#15803D] hover:scale-105 hover:text-white  text-start w-full py-2 pl-[10px] rounded-[4px]">About</button>
+              <button href=""
+                class="hover:bg-[#15803D] hover:scale-105 hover:text-white  text-start w-full py-2 pl-[10px] rounded-[4px]">Gallery</button>
+              <button href=""
+                class="hover:bg-[#15803D] hover:scale-105 hover:text-white  text-start w-full py-2 pl-[10px] rounded-[4px]">Plant
+                a Tree</button>
+            </ul>
+          </div>
+          <div class="flex items-center">
+            <img width="50" src="./assets/Adobe Express - file.png" alt="">
+            <a class="text-xl font-bold cursor-pointer max-md:text-white"> Green Earth</a>
+          </div>
         </div>
-        <div class="gap-6 navbar-center font-medium">
+        <div class="gap-6 navbar-center font-medium max-md:hidden">
           <a href="" class="hover:underline">About</a>
           <a href="" class="hover:underline">Gallery</a>
           <a href="" class="hover:underline">Plant a Tree</a>
@@ -40,10 +61,11 @@
     </section>
 
     <!-- banner -->
-    <section class="flex justify-between bg-[#CFF0DC] items-center text-center">
-      <div><img src="./assets/hero-leaf1.png" alt=""></div>
+    <section
+      class="flex justify-between bg-[#CFF0DC] items-center max-lg:items-end max-md:items-center text-center max-md:h-60 max-md:justify-center max-md:px-5">
+      <div class="max-lg:w-[450px] max-md:hidden"><img src="./assets/hero-leaf1.png" alt=""></div>
       <div>
-        <h1 class="font-bold text-4xl text-[#1F2937]">Plant a Tree, Grow a Future</h1>
+        <h1 class="font-bold text-3xl text-[#1F2937]">Plant a Tree, Grow a Future</h1>
         <p class="pb-6 pt-3 text-[#1F2937]">Join our mission to plant 1 million trees and make the Earth greener for
           future
           generations.</p>
@@ -51,25 +73,27 @@
           class="btn rounded-full bg-[#FACC15] hover:bg-[#cda70d] text-[#15803D] hover:text-white font-normal border-none shadow-none ">Get
           Involved</a>
       </div>
-      <div><img src="./assets/hero-leaf2.png" alt=""></div>
+      <div class="max-lg:w-[450px] max-md:hidden"><img src="./assets/hero-leaf2.png" alt=""></div>
     </section>
   </header>
 
   <main>
     <!-- card  -->
-    <section class="bg-[#F0FDF4]">
+    <section class="bg-[#F0FDF4] max-md:p-5 max-lg:p-5 max-md:justify-center">
       <h1 class="text-center font-semibold text-3xl pt-24">Choose Your Trees</h1>
-      <div class="flex py-10 w-[1350px] m-auto justify-between gap-7">
+      <div
+        class="flex flex-col md:flex-row max-lg:flex-wrap py-10 w-[1350px] max-lg:w-full m-auto  justify-between gap-7 max-md:w-full max-md:flex-row">
         <!-- Categories button -->
-        <div  class="w-1/5 flex-col flex items-start">
-          <h1 class="pb-5 text-xl font-semibold">Categories</h1>
-          <div id="cetagory-container" class="w-full">
+        <div class="w-1/5 flex-col flex items-start max-md:w-full">
+          <h1 class="pb-5 text-xl font-semibold ">Categories</h1>
+          <div id="cetagory-container" class="w-full max-lg:w-full">
             <button onclick="loadAllTrees(); removeActive();" href=""
-            class="hover:bg-[#15803D] hover:scale-105 hover:text-white  text-start w-full py-2 pl-[10px] rounded-[4px]">All Trees</button>
+              class="hover:bg-[#15803D] hover:scale-105 hover:text-white  text-start w-full py-2 pl-[10px] rounded-[4px]">All
+              Trees</button>
           </div>
         </div>
         <!-- card -->
-        <div id="card-container" class="grid grid-cols-3 gap-7 w-full justify-items-center">
+        <div id="card-container" class="grid grid-cols-2 lg:grid-cols-3 gap-5 w-full justify-items-center">
           <!-- card  -->
           <!-- <div class="max-w-sm bg-white rounded-lg shadow p-4">
             <img src="./assets/hero-leaf1.png" alt="">
@@ -90,23 +114,28 @@
           </div> -->
         </div>
         <!-- cart -->
-        <div id="cart_container" class="bg-white rounded-xl w-1/4">
+        <div class="bg-white rounded-xl w-1/4 max-md:w-full max-lg:w-2/3">
           <h1 class="font-semibold text-lg p-4">Your Cart</h1>
-          <div class="flex justify-between items-center mx-4 px-3 py-2 rounded-lg bg-[#F0FDF4]">
-            <div>
-              <h1>Mango Tree</h1>
-              <p>৳500 x 1</p>
-            </div>
-            <div>
-              <i class="fa-solid fa-xmark"></i>
-            </div>
+
+          <div id="cart_container">
+            <!-- <div class="flex justify-between items-center mx-4 px-3 py-2 rounded-lg bg-[#F0FDF4]">
+              <div>
+                <h1>Mango Tree</h1>
+                <p>৳500 x 1</p>
+              </div>
+              <div>
+                <button class="btn btn-square bg-transparent border-none hover:shadow-none justify-end"><i
+                    class="fa-solid fa-xmark"></i></button>
+              </div>
+            </div> -->
           </div>
+
           <div class="flex justify-between items-center mx-4 mt-4 border-t-2 border-gray-300 pt-1">
             <div class="text-end">
               <h1 class="font-semibold text-lg ">Total:</h1>
             </div>
             <div>
-              <h1 class="font-semibold text-lg ">৳1000</h1>
+              <h1 class="font-semibold text-lg ">৳<span id="total-peice">0</span></h1>
             </div>
           </div>
         </div>
@@ -115,17 +144,18 @@
 
 
     <!-- About the Campaign section -->
-    <section class="bg-[#F0FDF4] pb-24">
-      <div class="w-[1090px] m-auto pt-24">
+    <section class="bg-[#F0FDF4] pb-24 max-lg:px-10">
+      <div class="w-[1090px] max-md:w-full max-lg:w-full m-auto pt-24 max-md:pt-10 max-lg:pt-10">
         <div class="pb-10">
           <h1 class="text-center font-semibold text-3xl">About the Campaign</h1>
         </div>
-        <div class="flex items-center">
-          <div class="w-1/2">
+        <div class="flex max-md:flex-col items-center">
+          <div class="w-1/2 max-md:w-80 max-md:pb-10 max-lg:pb-10">
             <img width="530" src="./assets/about.png" alt="">
           </div>
           <div class="w-1/2 text-gray-500 pl-7">
-            <p>Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our start,
+            <p>Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our
+              start,
               we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore forests, create
               habitats for wildlife, and combat global warming.</p>
             <div class="pl-5 pt-5">
@@ -142,14 +172,14 @@
 
 
     <!-- Our Impact section  -->
-    <section class="text-center bg-[#CFF0DC] pb-24 pt-24">
+    <section class="text-center bg-[#CFF0DC] pb-24 pt-24 max-md:px-20">
       <div>
         <h1 class="text-3xl font-semibold">Our Impact</h1>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-13 max-w-5xl mx-auto px-4 pt-10">
 
         <!-- Card 1 -->
-        <div class="cursor-pointer bg-white rounded-lg shadow-md p-8 text-center 
+        <div class="cursor-pointer bg-white rounded-lg shadow-md p-8 max-md: text-center 
                 transform transition duration-300 hover:scale-115 hover:bg-[#a8fbc9]">
           <h3 class="text-3xl font-bold text-green-600">500K+</h3>
           <p class="text-gray-600">Trees Planted</p>
@@ -173,9 +203,9 @@
     </section>
 
     <!-- plant a tree today -->
-    <section class="bg-[#166534] h-[591px] pt-30 text-center">
+    <section class="bg-[#166534] h-[591px] pt-30 text-center max-md:px-5">
       <h1 class="text-3xl font-semibold pb-10 text-white">Plant a Tree Today</h1>
-      <div class="text-center justify-center h-[315px] w-[650px] bg-[#15803D] rounded-xl m-auto">
+      <div class="text-center justify-center h-[315px] w-[650px] max-md:w-full bg-[#15803D] rounded-xl m-auto">
         <form>
           <div class="p-10">
             <div class=""><input type="text" placeholder="Your Name" class="input input-md w-full py-6" /></div>
@@ -208,9 +238,25 @@
     <p class="py-6 text-white">© 2025 Green Earth. All Rights Reserved.</p>
   </footer>
 
-
+  <!-- Open the modal using ID.showModal() method -->
+  <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+  <dialog id="plants_modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <div id="details-container">
+      </div>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+    </div>
+  </dialog>
 
   <script src="./script/index.js"></script>
 </body>
 
 </html>
+
+
+
+</div>
