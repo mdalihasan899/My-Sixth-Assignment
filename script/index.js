@@ -1,4 +1,3 @@
-
 const loadCategories = () => {
   fetch(`https://openapi.programming-hero.com/api/categories`)
     .then((res) => res.json())
@@ -30,6 +29,16 @@ const plantDitels = (id) => {
     .then((ditels) => aboutPlants(ditels.plants))
 }
 
+const managelode = (status) => {
+  if (status == true) {
+    document.getElementById("load-spin").classList.remove("hidden");
+    document.getElementById("card-container").classList.add("hidden");
+  }
+  else {
+    document.getElementById("card-container").classList.remove("hidden");
+    document.getElementById("load-spin").classList.add("hidden");
+  }
+}
 
 
 const aboutPlants = (plants) => {
@@ -53,6 +62,7 @@ const aboutPlants = (plants) => {
 
 
 const displayDifPlants = (DifPlants) => {
+  managelode(true);
   const plantsContainer = document.getElementById("card-container");
   plantsContainer.innerHTML = "";
   DifPlants.forEach(DifPlant => {
@@ -78,7 +88,7 @@ const displayDifPlants = (DifPlants) => {
     `
 
     plantsContainer.appendChild(plantsByCategoris);
-
+    managelode(false);
     const yourCartBtn = plantsByCategoris.querySelector(".cart-btn");
     yourCartBtn.addEventListener("click", function () {
       const treeName = DifPlant.name;
@@ -144,6 +154,7 @@ const loadAllTrees = () => {
 }
 
 const displayAllTrees = (Trees) => {
+  managelode(true);
   const TreeContainer = document.getElementById("card-container");
   TreeContainer.innerHTML = "";
   for (const Tree of Trees) {
@@ -210,8 +221,6 @@ const displayAllTrees = (Trees) => {
 
     });
   }
+  managelode(false);
 }
 loadAllTrees();
-
-
-
