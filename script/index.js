@@ -5,6 +5,7 @@ const loadCategories = () => {
 }
 
 const loadPlants = (id) => {
+  managelode(true);
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
@@ -42,7 +43,6 @@ const managelode = (status) => {
 
 
 const aboutPlants = (plants) => {
-  console.log(plants);
 
   const plantsDitelsBox = document.getElementById("details-container");
   plantsDitelsBox.innerHTML = `
@@ -62,7 +62,7 @@ const aboutPlants = (plants) => {
 
 
 const displayDifPlants = (DifPlants) => {
-  managelode(true);
+  
   const plantsContainer = document.getElementById("card-container");
   plantsContainer.innerHTML = "";
   DifPlants.forEach(DifPlant => {
@@ -88,7 +88,7 @@ const displayDifPlants = (DifPlants) => {
     `
 
     plantsContainer.appendChild(plantsByCategoris);
-    managelode(false);
+    
     const yourCartBtn = plantsByCategoris.querySelector(".cart-btn");
     yourCartBtn.addEventListener("click", function () {
       const treeName = DifPlant.name;
@@ -126,6 +126,7 @@ const displayDifPlants = (DifPlants) => {
       });
     });
   })
+  managelode(false);
 }
 
 
@@ -148,13 +149,13 @@ loadCategories();
 
 // All Trees
 const loadAllTrees = () => {
+  managelode(true);
   fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
     .then((json) => displayAllTrees(json.plants))
 }
 
 const displayAllTrees = (Trees) => {
-  managelode(true);
   const TreeContainer = document.getElementById("card-container");
   TreeContainer.innerHTML = "";
   for (const Tree of Trees) {
@@ -221,6 +222,6 @@ const displayAllTrees = (Trees) => {
 
     });
   }
-  managelode(false);
+   managelode(false);
 }
 loadAllTrees();

@@ -80,10 +80,7 @@
 
   <main>
 
-    <section id="load-spin" class="flex justify-center items-center py-10 hidden">
-      <!-- loding -->
-        <span class="loading loading-ring loading-xl"></span>
-    </section>
+
     <!-- card  -->
     <section class="bg-[#F0FDF4] max-md:p-5 max-lg:p-5 max-md:justify-center">
       <h1 class="text-center font-semibold text-3xl pt-24">Choose Your Trees</h1>
@@ -99,7 +96,10 @@
           </div>
         </div>
 
-        
+        <div id="load-spin" class="flex justify-center items-center py-10 hidden">
+          <!-- loding -->
+          <span class="loading loading-bars loading-lg"></span>
+        </div>
 
         <!-- card -->
         <div id="card-container" class="grid grid-cols-2 lg:grid-cols-3 gap-5 w-full justify-items-center">
@@ -248,13 +248,12 @@
   </footer>
 
   <!-- Open the modal using ID.showModal() method -->
-  <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+  <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
   <dialog id="plants_modal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <div id="details-container">
       </div>
       <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>
       </form>
     </div>
